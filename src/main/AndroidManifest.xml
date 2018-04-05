@@ -1,0 +1,290 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.opentaxi.android"
+          android:versionName=".0.40"
+          android:versionCode="40"
+          android:installLocation="auto">
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="23"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!--ACRA If the READ_PHONE_STATE permission is granted, reports include the Unique Device Identifier (IMEI)-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>-->
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <!--aGIT-->
+    <!--<uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_STATS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>-->
+
+    <!--auto update-->
+    <!--<uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.DELETE_PACKAGES"/>-->
+
+    <!--Permission Denial: can't dump meminfo from from pid=2322, uid=10106 without permission android.permission.DUMP-->
+    <!--<uses-permission android:name="android.permission.DUMP"/>-->
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false"/>
+
+    <!--
+     Creates a custom permission so only this app can receive its messages.
+
+     NOTE: the permission *must* be called PACKAGE.permission.C2D_MESSAGE,
+           where PACKAGE is the application's package name.
+    -->
+    <permission
+        android:name="com.opentaxi.android.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="com.opentaxi.android.permission.C2D_MESSAGE"/>
+
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:name="TaxiApplication"
+        android:label="@string/app_name"
+        android:icon="@drawable/icon"
+        android:persistent="true"
+        android:allowBackup="true"
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <activity
+            android:name=".MainActivity_"
+            android:label="@string/app_name"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:finishOnTaskLaunch="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--android:launchMode="singleInstance"-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.facebook.FacebookActivity"
+                  android:configChanges=
+                      "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:label="@string/app_name"/>
+        <!--<activity
+            android:name=".UserPassActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>-->
+        <!--<activity
+            android:name="com.facebook.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name"/>-->
+        <!--<activity
+            android:name=".NewClientActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>-->
+
+        <activity
+            android:name=".MessageActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:noHistory="true">
+        </activity>
+
+        <!--<activity
+            android:name=".NewRequestActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>-->
+        <!--<activity
+            android:name=".RequestsActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>
+        <activity
+            android:name=".EditRequestActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>
+        <activity
+            android:name=".RequestDetailsActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>
+        <activity
+            android:name=".CarDetailsActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>
+-->
+        <!--<activity
+            android:name=".ServersActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>-->
+        <!--<activity
+            android:name=".HelpActivity_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+        </activity>-->
+
+        <!--osmap-->
+        <!--<activity
+            android:name="org.mapsforge.applications.android.LocationOverlayMapViewer"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:finishOnTaskLaunch="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>-->
+        <activity
+            android:name="com.opentaxi.android.BubbleOverlay_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:finishOnTaskLaunch="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.opentaxi.android.LongPressMapAction_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+        <!--<activity
+            android:name="com.opentaxi.android.LongPressMapEditAction_"
+            android:allowTaskReparenting="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>-->
+
+        <activity android:name="org.mapsforge.applications.android.filepicker.FilePicker"/>
+        <activity android:name="org.mapsforge.applications.android.Settings"/>
+
+        <!--
+          WakefulBroadcastReceiver that will receive intents from GCM
+          services and hand them to the custom IntentService.
+
+          The com.google.android.c2dm.permission.SEND permission is necessary
+          so only GCM services can send data messages for the app.
+        -->
+        <!--<receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                &lt;!&ndash; Receives the actual messages. &ndash;&gt;
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+
+                <category android:name="com.opentaxi.android"/>
+            </intent-filter>
+        </receiver>-->
+
+        <receiver android:name=".NetworkStateReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+
+                <category android:name="com.opentaxi.android"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".gcm.GcmMessageHandler"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </service>
+        <!--<service android:name=".GcmIntentService"/>-->
+        <service
+            android:name=".gcm.InstanceIdListener"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name=".service.CoordinatesService"/>
+        <service android:exported="false" android:name=".gcm.GCMRegisterService"/>
+
+        <!--<service android:name="com.littlefluffytoys.littlefluffylocationlibrary.LocationBroadcastService"/>
+
+        <receiver
+            android:name="com.littlefluffytoys.littlefluffylocationlibrary.PassiveLocationChangedReceiver"
+            android:exported="true"/>
+
+        <receiver android:name=".service.UserGpsBroadcastReceiver">
+            <intent-filter>
+                <action
+                    android:name="com.opentaxi.android.littlefluffylocationlibrary.LOCATION_CHANGED"
+                    android:exported="true"/>
+            </intent-filter>
+        </receiver>-->
+
+    </application>
+
+</manifest> 
